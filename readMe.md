@@ -119,3 +119,83 @@ for ($j = 10; $j > 5; $j--) {
     echo $j, " ";
 }
 ```
+
+# Tablice
+
+Tablice to struktury pozwalające na przechowywanie większej ilości danych w uporządkowanej formie.
+
+```php
+$numbers = array(3, 1, 4, 1, 5);
+```
+
+Inicjalizacja tablicy odbywa się poprzez funkcję `array`. W nawiasie wypisujemy elementy.
+
+```php
+echo "Pierwszy element: ", $numbers[0];
+```
+
+Podobnie jak w innych językach, indeksowanie elementów rozpoczyna się od zera.
+
+# Tablice asocjacyjne
+
+Tablice asocjacyjne to tablice, w których zamiast indeksu numerycznego poszczególne elementy posiadają swoje klucze.
+
+```php
+$person = array(
+    "name" => "John",
+    "surname" => "Paul"
+);
+```
+
+W nawiasach funkcji `array` wypisujemy kolejne pary - klucze i wartości, oddzielone znakami `=>`.
+
+```php
+echo "Mam na imię ", $person["name"];
+```
+
+W celu odniesienia się do danego elementu musimy podać jego klucz.
+
+# Pętla foreach
+
+Podczas pracy z tablicami, poza standardowymi pętlami, pobocna okazać może się pętla `foreach`. W tym przypadku iterujemy po kolejnych elementach, nie martwiąc się o indeksy.
+
+```php
+$letters = array('n', 'i', 'y', 'a');
+
+foreach ($letters as $letter)
+    echo $letter, " ";
+```
+
+W przypadku tablic asocjacyjnych nalęzy pomiętać o dodatkowej zmiennej do pzechowywania klucza.
+
+```php
+$numbers = array(
+
+    "first" => 1,
+    "second" => 2,
+    "third" => 3
+);
+
+foreach ($numbers as $key => $value)
+    echo "Klucz: ", $key, ", Wartość: ", $value, "<br>";
+```
+
+# Obsługa formularzy
+
+Do podstawowej komunikacji z użytkownikiem wymagany jest prosty formularz z określonymi atrybutami `action` oraz `metohd`.
+
+```html
+<form action = "form.php" method = "POST">
+    <label for = "name">Name</label>
+    <input type = "text" id = "name" name = "name">
+
+    <button>Submit</submit>
+</form>
+```
+
+W pliku wynikowym, inforamcje z formularza znajdują się w tablicach asocjacyjnych `$_GET` lub `$_POST`, w zależności od wybranej metody.
+
+```php
+if (isset($_GET["name"]))
+    echo "Name: ", $_GET["name"];
+```
