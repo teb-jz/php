@@ -67,7 +67,7 @@ Wyróżniamy kilka podstawowych sposobów zapisywania ciągów znaków - w zale�
 ```php
 $number = 2;
 $anotherNumber = 3.14;
-$flag = true
+$flag = true;
 ```
 
 *PHP* posiada kilka podstawowych, wbudowanych typów prostych, jak liczby czy wartości logiczne.
