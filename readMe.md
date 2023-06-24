@@ -199,3 +199,66 @@ W pliku wynikowym, inforamcje z formularza znajdują się w tablicach asocjacyjn
 if (isset($_GET["name"]))
     echo "Name: ", $_GET["name"];
 ```
+
+# Komunikacja z bazą danych
+
+Łączenie z bazą wymaga podania adresu serwera oraz danych logowania do jednego z kont.
+
+```php
+$conn = mysqli_connect("localhost", "root", "");
+
+if (!$conn) {
+
+    die("Błąd połączenia: " . mysqli_connect_error() . "<br>");
+}
+
+else {
+
+    echo "Pomyślnie nawiązano połączenie" . "<br>";
+
+    mysqli_close($conn);
+}
+```
+
+Możemy od razu wskazać interesującą nas bazę, poprzez podanie jej nazwy.
+
+```php
+$conn = mysqli_connect("localhost", "root", "", "sample");
+```
+
+Za pośrednictwem funkcji `mysqli_query` jesteśmy w stanie formułować dowolne zapytania.
+
+```php
+$sql = "CREATE TABLE sampleTable (
+id INT(6) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+sampleText VARCHAR(30) NOT NULL
+)";
+
+if (mysqli_query($conn, $sql)) {
+
+    echo "Pomyślnie utworzono tabelę" . "<br>";
+}
+
+else {
+
+    echo "Błąd tworzenia tabeli: " . mysqli_error($conn) . "<br>";
+}
+```
+
+W przypadku **projekcji** możemy wykorzystać pętle, by wygodniej wyświetlać interesujące nas dane.
+
+```php
+$sql = "SELECT id, sampleText FROM sampleTable";
+
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+
+    while ($row = mysqli_fetch_assoc($result)) {
+
+        echo "id: " . $row["id"];
+        echo ", sampleText: " . $row["sampleText"] . "<br>";
+    }
+
+}
+```
